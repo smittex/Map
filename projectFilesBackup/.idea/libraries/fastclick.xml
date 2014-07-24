@@ -1,0 +1,14 @@
+<component name="libraryTable">
+  <library name="fastclick" type="javaScript">
+    <CLASSES>
+      <root url="file://$PROJECT_DIR$/js/vendor/fastclick.js" />
+      <root url="file://$PROJECT_DIR$/js/vendor/jquery.cookie.js" />
+      <root url="file://$PROJECT_DIR$/js/vendor/jquery.js" />
+      <root url="file://$PROJECT_DIR$/js/vendor/modernizr.js" />
+      <root url="file://$PROJECT_DIR$/js/vendor/placeholder.js" />
+      <root url="file://$PROJECT_DIR$/js/foundation.min.js" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES />
+  </library>
+</component>
