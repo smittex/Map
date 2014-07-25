@@ -103,7 +103,7 @@
            * the control DIV as an argument.
            * @constructor
            */
-          function HomeControl(controlDiv, map) {
+/*          function HomeControl(controlDiv, map) {
 
               // Set CSS styles for the DIV containing the control
               // Setting padding to 5 px will offset the control
@@ -135,7 +135,7 @@
                  // map.setCenter(chicago)
               });
 
-          }
+          }*/
 
 
           function initialize() {
@@ -198,6 +198,19 @@
                   }
               });
 
+              layer3 = new google.maps.FusionTablesLayer({
+                  map: map,
+                  heatmap: { enabled: false },
+                  query: {
+                      select: "col6\x3e\x3e0",
+                      from: "1HBr7P4oowfyWTExXZYw0KqYEDCKF0-9gx7GU6c-q",
+                      where: ""
+                  },
+                  options: {
+                      styleId: 2,
+                      templateId: 2
+                  }
+              });
 
 
 
@@ -206,12 +219,12 @@
               // Create the DIV to hold the control and
               // call the HomeControl() constructor passing
               // in this DIV.
-              var homeControlDiv = document.createElement('div');
+        /*      var homeControlDiv = document.createElement('div');
               var homeControl = new HomeControl(homeControlDiv, map);
 
               homeControlDiv.index = 1;
               map.controls[google.maps.ControlPosition.TOP_RIGHT].push(homeControlDiv);
-
+*/
 /*              if (isMobile) {
                   var legend = document.getElementById('googft-legend');
                   var legendOpenButton = document.getElementById('googft-legend-open');
