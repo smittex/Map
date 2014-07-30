@@ -264,33 +264,36 @@
     </div>
 </div>
 
+<div id="googft-legend" style="display: none;"></div>
 
-<div id="googft-legend">
-    <p id="googft-legend-title">Senior Poverty Rate</p>
+<script id="legend" type="text/x-handlebars-template">
+    <div id="googft-legend">
+        {{#each subLegends}}
+        <p id="googft-legend-title">{{title}}</p>
 
-    <div>
-        <span class="googft-legend-swatch" style="background-color: #00ff00"></span>
-        <span class="googft-legend-range">0%</span>
+        <div>
+            <span class="googft-legend-swatch" style="background-color: #00ff00"></span>
+            <span class="googft-legend-range">{{int0}}</span>
+        </div>
+        <div>
+            <span class="googft-legend-swatch" style="background-color: #ffff00"></span>
+            <span class="googft-legend-range">{{int1}}</span>
+        </div>
+        <div>
+            <span class="googft-legend-swatch" style="background-color: #ff9900"></span>
+            <span class="googft-legend-range">{{int2}}</span>
+        </div>
+        <div>
+            <span class="googft-legend-swatch" style="background-color: #ff0000"></span>
+            <span class="googft-legend-range">{{int3}}</span>
+        </div>
+        {{/each}}
     </div>
-    <div>
-        <span class="googft-legend-swatch" style="background-color: #ffff00"></span>
-        <span class="googft-legend-range">33%</span>
-    </div>
-    <div>
-        <span class="googft-legend-swatch" style="background-color: #ff9900"></span>
-        <span class="googft-legend-range">67%</span>
-    </div>
-    <div>
-        <span class="googft-legend-swatch" style="background-color: #ff0000"></span>
-        <span class="googft-legend-range">100%</span>
-    </div>
-    <div class="googft-legend-source">
-        <a href="data?docid=1vZSvyPyfneLqGIhWEBA7ltERhz1K73_35QqjgVcT" target="_blank">Source</a>
-    </div>
-</div>
+</script>
 
 <script src="js/vendor/jquery.js"></script>
 <script src="js/foundation.min.js"></script>
+<script src="js/vendor/handlebars-v1.3.0.js"></script>
 <script>
     $(document).foundation();
     $(".full-height").height($(".main").parent().height());

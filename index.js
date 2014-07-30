@@ -13,11 +13,6 @@ function initialize() {
         mapTypeId: google.maps.MapTypeId.ROADMAP
     });
 
-    /*
-
-     map.controls[google.maps.ControlPosition.RIGHT_BOTTOM].push(document.getElementById('googft-legend-open'));
-     map.controls[google.maps.ControlPosition.RIGHT_BOTTOM].push(document.getElementById('googft-legend'));
-     */
 }
 
 google.maps.event.addDomListener(window, 'load', initialize);
@@ -81,7 +76,12 @@ var layers = [
                 styleId: 6,
                 templateId: 6
             }
-        })
+        }),
+        legend: {
+            title: 'Child Population',
+            min: 0,
+            max: 1931
+        }
     },
     {
         name: 'childrenInPovertySwitch',
@@ -96,7 +96,12 @@ var layers = [
                 styleId: 7,
                 templateId: 7
             }
-        })
+        }),
+        legend: {
+            title: 'Children in Poverty',
+            min: 0,
+            max: 1080
+        }
     },
     {
         name: 'childPovertyRateSwitch',
@@ -111,7 +116,13 @@ var layers = [
                 styleId: 8,
                 templateId: 8
             }
-        })
+        }),
+        legend: {
+            title: 'Child Poverty Rate',
+            min: 0,
+            max: 100,
+            pct: true
+        }
     },
     {
         name: 'sixToEighteenPopulationSwitch',
@@ -126,7 +137,12 @@ var layers = [
                 styleId: 9,
                 templateId: 9
             }
-        })
+        }),
+        legend: {
+            title: '6-18 Population',
+            min: 0,
+            max: 2850
+        }
     },
     {
         name: 'sixToEighteenInPovertySwitch',
@@ -141,7 +157,12 @@ var layers = [
                 styleId: 10,
                 templateId: 10
             }
-        })
+        }),
+        legend: {
+            title: '6-18 in Poverty',
+            min: 0,
+            max: 1192
+        }
     },
     {
         name: 'sixToEighteenPovertyRateSwitch',
@@ -156,7 +177,13 @@ var layers = [
                 styleId: 11,
                 templateId: 11
             }
-        })
+        }),
+        legend: {
+            title: '6-18 Poverty Rate',
+            min: 0,
+            max: 100,
+            pct: true
+        }
     },
     {
         name: 'seniorPopulationSwitch',
@@ -171,7 +198,12 @@ var layers = [
                 styleId: 2,
                 templateId: 2
             }
-        })
+        }),
+        legend: {
+            title: 'Senior Population',
+            min: 0,
+            max: 1712
+        }
     },
     {
         name: 'seniorsInPovertySwitch',
@@ -186,7 +218,12 @@ var layers = [
                 styleId: 4,
                 templateId: 4
             }
-        })
+        }),
+        legend: {
+            title: 'Seniors in Poverty',
+            min: 0,
+            max: 599
+        }
     },
     {
         name: 'seniorPovertyRateSwitch',
@@ -201,15 +238,56 @@ var layers = [
                 styleId: 5,
                 templateId: 5
             }
-        })
+        }),
+        legend: {
+            title: 'Senior Poverty Rate',
+            min: 0,
+            max: 100,
+            pct: true
+        }
     }
 ];
 
+var source   = $("#legend").html();
+var template = Handlebars.compile(source);
+
 $(document).ready(function () {
     $('.switch [type=checkbox]').change(function () {
+        var legendData = [],
+            context = {subLegends: []};
+
         // Iterating from top down to keep the food shelf, CSFP, and congressional layers on top
         for (var i = layers.length - 1; i >= 0; i--) {
             layers[i].overlay.setMap($('#' + layers[i].name)[0].checked ? map : null);
+
+            if($('#' + layers[i].name)[0].checked) {
+                //var tmp =
+                legendData.push(layers[i].legend);
+            }
+
         }
+
+        // Reverse the legend data and push them into an object
+        for (var i = legendData.length - 1; i >= 0; i--) {
+            var legend = legendData[i];
+
+            if (typeof legend != 'undefined') {
+                var diff    = legend.max - legend.min,
+                    append  = legend.pct ? ' %' : '';
+                    tmp     = {
+                        title: legendData[i].title,
+                        int0: legend.min + append,
+                        int1: Math.round(diff/3) + append,
+                        int2: Math.round(2*diff/3) + append,
+                        int3: legend.max + append
+                    };
+
+                context.subLegends.push(tmp);
+            }
+        }
+
+        var legend = template(context);
+        $('#googft-legend').replaceWith(legend);
+        map.controls[google.maps.ControlPosition.RIGHT_BOTTOM].push(document.getElementById('googft-legend'));
     });
 });
