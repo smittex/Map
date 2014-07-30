@@ -22,8 +22,9 @@ function initialize() {
 
 google.maps.event.addDomListener(window, 'load', initialize);
 
-var layers = {
-    'foodShelfSwitch':{
+var layers = [
+    {
+        name: 'foodShelfSwitch',
         overlay: new google.maps.FusionTablesLayer({
             heatmap: { enabled: false },
             query: {
@@ -37,7 +38,8 @@ var layers = {
             }
         })
     },
-    'csfpSwitch':{
+    {
+        name: 'csfpSwitch',
         overlay: new google.maps.FusionTablesLayer({
             heatmap: { enabled: false },
             query: {
@@ -51,7 +53,8 @@ var layers = {
             }
         })
     },
-    'conDistSwitch': {
+    {
+        name: 'conDistSwitch',
         overlay: new google.maps.FusionTablesLayer({
             heatmap: { enabled: false },
             query: {
@@ -65,7 +68,8 @@ var layers = {
             }
         })
     },
-    'childPopulationSwitch':{
+    {
+        name: 'childPopulationSwitch',
         overlay: new google.maps.FusionTablesLayer({
             heatmap: { enabled: false },
             query: {
@@ -79,7 +83,8 @@ var layers = {
             }
         })
     },
-    'childrenInPovertySwitch':{
+    {
+        name: 'childrenInPovertySwitch',
         overlay: new google.maps.FusionTablesLayer({
             heatmap: { enabled: false },
             query: {
@@ -93,7 +98,8 @@ var layers = {
             }
         })
     },
-    'childPovertyRateSwitch':{
+    {
+        name: 'childPovertyRateSwitch',
         overlay: new google.maps.FusionTablesLayer({
             heatmap: { enabled: false },
             query: {
@@ -107,7 +113,8 @@ var layers = {
             }
         })
     },
-    'sixToEighteenPopulationSwitch':{
+    {
+        name: 'sixToEighteenPopulationSwitch',
         overlay: new google.maps.FusionTablesLayer({
             heatmap: { enabled: false },
             query: {
@@ -121,7 +128,8 @@ var layers = {
             }
         })
     },
-    'sixToEighteenInPovertySwitch':{
+    {
+        name: 'sixToEighteenInPovertySwitch',
         overlay: new google.maps.FusionTablesLayer({
             heatmap: { enabled: false },
             query: {
@@ -135,7 +143,8 @@ var layers = {
             }
         })
     },
-    'sixToEighteenPovertyRateSwitch':{
+    {
+        name: 'sixToEighteenPovertyRateSwitch',
         overlay: new google.maps.FusionTablesLayer({
             heatmap: { enabled: false },
             query: {
@@ -149,7 +158,8 @@ var layers = {
             }
         })
     },
-    'seniorPopulationSwitch':{
+    {
+        name: 'seniorPopulationSwitch',
         overlay: new google.maps.FusionTablesLayer({
             heatmap: { enabled: false },
             query: {
@@ -163,7 +173,8 @@ var layers = {
             }
         })
     },
-    'seniorsInPovertySwitch':{
+    {
+        name: 'seniorsInPovertySwitch',
         overlay: new google.maps.FusionTablesLayer({
             heatmap: { enabled: false },
             query: {
@@ -177,7 +188,8 @@ var layers = {
             }
         })
     },
-    'seniorPovertyRateSwitch':{
+    {
+        name: 'seniorPovertyRateSwitch',
         overlay: new google.maps.FusionTablesLayer({
             heatmap: { enabled: false },
             query: {
@@ -191,14 +203,13 @@ var layers = {
             }
         })
     }
-};
+];
 
 $(document).ready(function () {
     $('.switch [type=checkbox]').change(function () {
-        for (var layer in layers) {
-            if (this.id === layer) {
-                layers[layer].overlay.setMap(this.checked ? map : null);
-            }
+        // Iterating from top down to keep the food shelf, CSFP, and congressional layers on top
+        for (var i = layers.length - 1; i >= 0; i--) {
+            layers[i].overlay.setMap($('#' + layers[i].name)[0].checked ? map : null);
         }
     });
 });
