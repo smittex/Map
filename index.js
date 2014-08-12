@@ -1,3 +1,6 @@
+$(document).foundation();
+$(".full-height").height($(".main").parent().height());
+
 var map;
 
 function initialize() {
@@ -49,6 +52,21 @@ var layers = [
         })
     },
     {
+        name: 'schoolSwitch',
+        overlay: new google.maps.FusionTablesLayer({
+            heatmap: { enabled: false },
+            query: {
+                select: "col6\x3e\x3e0",
+                from: "",
+                where: ""
+            },
+            options: {
+                styleId: 2,
+                templateId: 2
+            }
+        })
+    },
+    {
         name: 'conDistSwitch',
         overlay: new google.maps.FusionTablesLayer({
             heatmap: { enabled: false },
@@ -62,26 +80,6 @@ var layers = [
                 templateId: 2
             }
         })
-    },
-    {
-        name: 'childPopulationSwitch',
-        overlay: new google.maps.FusionTablesLayer({
-            heatmap: { enabled: false },
-            query: {
-                select: "col14\x3e\x3e1",
-                from: "1vZSvyPyfneLqGIhWEBA7ltERhz1K73_35QqjgVcT",
-                where: ""
-            },
-            options: {
-                styleId: 6,
-                templateId: 6
-            }
-        }),
-        legend: {
-            title: 'Child Population',
-            min: 0,
-            max: 1931
-        }
     },
     {
         name: 'childrenInPovertySwitch',
@@ -98,50 +96,11 @@ var layers = [
             }
         }),
         legend: {
-            title: 'Children in Poverty',
+            title: 'Children 0-5 in Poverty',
             min: 0,
-            max: 1080
-        }
-    },
-    {
-        name: 'childPovertyRateSwitch',
-        overlay: new google.maps.FusionTablesLayer({
-            heatmap: { enabled: false },
-            query: {
-                select: "col14\x3e\x3e1",
-                from: "1vZSvyPyfneLqGIhWEBA7ltERhz1K73_35QqjgVcT",
-                where: ""
-            },
-            options: {
-                styleId: 8,
-                templateId: 8
-            }
-        }),
-        legend: {
-            title: 'Child Poverty Rate',
-            min: 0,
-            max: 100,
-            pct: true
-        }
-    },
-    {
-        name: 'sixToEighteenPopulationSwitch',
-        overlay: new google.maps.FusionTablesLayer({
-            heatmap: { enabled: false },
-            query: {
-                select: "col14\x3e\x3e1",
-                from: "1vZSvyPyfneLqGIhWEBA7ltERhz1K73_35QqjgVcT",
-                where: ""
-            },
-            options: {
-                styleId: 9,
-                templateId: 9
-            }
-        }),
-        legend: {
-            title: '6-18 Population',
-            min: 0,
-            max: 2850
+            max: 1080,
+            minColor: '#cfe2f3',
+            maxColor: '#0000ff'
         }
     },
     {
@@ -159,50 +118,11 @@ var layers = [
             }
         }),
         legend: {
-            title: '6-18 in Poverty',
+            title: 'Children 6-18 in Poverty',
             min: 0,
-            max: 1192
-        }
-    },
-    {
-        name: 'sixToEighteenPovertyRateSwitch',
-        overlay: new google.maps.FusionTablesLayer({
-            heatmap: { enabled: false },
-            query: {
-                select: "col14\x3e\x3e1",
-                from: "1vZSvyPyfneLqGIhWEBA7ltERhz1K73_35QqjgVcT",
-                where: ""
-            },
-            options: {
-                styleId: 11,
-                templateId: 11
-            }
-        }),
-        legend: {
-            title: '6-18 Poverty Rate',
-            min: 0,
-            max: 100,
-            pct: true
-        }
-    },
-    {
-        name: 'seniorPopulationSwitch',
-        overlay: new google.maps.FusionTablesLayer({
-            heatmap: { enabled: false },
-            query: {
-                select: "col14\x3e\x3e1",
-                from: "1vZSvyPyfneLqGIhWEBA7ltERhz1K73_35QqjgVcT",
-                where: ""
-            },
-            options: {
-                styleId: 2,
-                templateId: 2
-            }
-        }),
-        legend: {
-            title: 'Senior Population',
-            min: 0,
-            max: 1712
+            max: 1192,
+            minColor: '#d9ead3',
+            maxColor: '#00ff00'
         }
     },
     {
@@ -222,30 +142,11 @@ var layers = [
         legend: {
             title: 'Seniors in Poverty',
             min: 0,
-            max: 599
+            max: 599,
+            minColor: '#f4cccc',
+            maxColor: '#ff0000'
         }
     },
-    {
-        name: 'seniorPovertyRateSwitch',
-        overlay: new google.maps.FusionTablesLayer({
-            heatmap: { enabled: false },
-            query: {
-                select: "col14\x3e\x3e1",
-                from: "1vZSvyPyfneLqGIhWEBA7ltERhz1K73_35QqjgVcT",
-                where: ""
-            },
-            options: {
-                styleId: 5,
-                templateId: 5
-            }
-        }),
-        legend: {
-            title: 'Senior Poverty Rate',
-            min: 0,
-            max: 100,
-            pct: true
-        }
-    }
 ];
 
 var source   = $("#legend").html();
@@ -261,33 +162,21 @@ $(document).ready(function () {
             layers[i].overlay.setMap($('#' + layers[i].name)[0].checked ? map : null);
 
             if($('#' + layers[i].name)[0].checked) {
-                //var tmp =
                 legendData.push(layers[i].legend);
             }
-
         }
 
         // Reverse the legend data and push them into an object
         for (var i = legendData.length - 1; i >= 0; i--) {
-            var legend = legendData[i];
-
-            if (typeof legend != 'undefined') {
-                var diff    = legend.max - legend.min,
-                    append  = legend.pct ? ' %' : '';
-                    tmp     = {
-                        title: legendData[i].title,
-                        int0: legend.min + append,
-                        int1: Math.round(diff/3) + append,
-                        int2: Math.round(2*diff/3) + append,
-                        int3: legend.max + append
-                    };
-
-                context.subLegends.push(tmp);
+            if (typeof legendData[i] != 'undefined') {
+                // Determine if there's an item before this item for styling reasons
+                legendData[i].hasNext = typeof legendData[i - 1] != "undefined";
+                context.subLegends.push(legendData[i]);
             }
         }
 
         var legend = template(context);
         $('#googft-legend').replaceWith(legend);
-        map.controls[google.maps.ControlPosition.RIGHT_BOTTOM].push(document.getElementById('googft-legend'));
+        context.subLegends.length ? map.controls[google.maps.ControlPosition.RIGHT_BOTTOM].push(document.getElementById('googft-legend')) : null;
     });
 });

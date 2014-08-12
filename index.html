@@ -7,6 +7,7 @@
     <link rel="stylesheet" href="css/foundation.css"/>
     <script src="js/vendor/modernizr.js"></script>
     <style type="text/css">
+
         html, body {
             height: 100% !important;
             margin: 0;
@@ -31,9 +32,7 @@
         }
 
         img, #googft-mapCanvas {
-            max-width: none;
-        / / Fix for Foundation breakin
-
+            max-width: none; /* Fix for Foundation breakin */
         }
 
         .main, .row {
@@ -129,6 +128,19 @@
 
             <div class="row" data-equalizer>
                 <div class="small-6 column text-right" data-equalizer-watch>
+                    Schools
+                </div>
+                <div class="small-6 column" data-equalizer-watch>
+                    <div class="switch round">
+                        <input id="schoolSwitch" type="checkbox">
+                        <label for="schoolSwitch"></label>
+                    </div>
+                </div>
+                <hr>
+            </div>
+
+            <div class="row" data-equalizer>
+                <div class="small-6 column text-right" data-equalizer-watch>
                     Congressional Districts
                 </div>
                 <div class="small-6 column" data-equalizer-watch>
@@ -142,20 +154,7 @@
 
             <div class="row" data-equalizer>
                 <div class="small-6 column text-right" data-equalizer-watch>
-                    Child Population
-                </div>
-                <div class="small-6 column" data-equalizer-watch>
-                    <div class="switch round">
-                        <input id="childPopulationSwitch" type="checkbox">
-                        <label for="childPopulationSwitch"></label>
-                    </div>
-                </div>
-                <hr>
-            </div>
-
-            <div class="row" data-equalizer>
-                <div class="small-6 column text-right" data-equalizer-watch>
-                    Children in Poverty
+                    Children 0-5 in Poverty
                 </div>
                 <div class="small-6 column" data-equalizer-watch>
                     <div class="switch round">
@@ -168,64 +167,12 @@
 
             <div class="row" data-equalizer>
                 <div class="small-6 column text-right" data-equalizer-watch>
-                    Child Poverty Rate
-                </div>
-                <div class="small-6 column" data-equalizer-watch>
-                    <div class="switch round">
-                        <input id="childPovertyRateSwitch" type="checkbox">
-                        <label for="childPovertyRateSwitch"></label>
-                    </div>
-                </div>
-                <hr>
-            </div>
-
-            <div class="row" data-equalizer>
-                <div class="small-6 column text-right" data-equalizer-watch>
-                    6-18 Population
-                </div>
-                <div class="small-6 column" data-equalizer-watch>
-                    <div class="switch round">
-                        <input id="sixToEighteenPopulationSwitch" type="checkbox">
-                        <label for="sixToEighteenPopulationSwitch"></label>
-                    </div>
-                </div>
-                <hr>
-            </div>
-
-            <div class="row" data-equalizer>
-                <div class="small-6 column text-right" data-equalizer-watch>
-                    6-18 in Poverty
+                    Children 6-18 in Poverty
                 </div>
                 <div class="small-6 column" data-equalizer-watch>
                     <div class="switch round">
                         <input id="sixToEighteenInPovertySwitch" type="checkbox">
                         <label for="sixToEighteenInPovertySwitch"></label>
-                    </div>
-                </div>
-                <hr>
-            </div>
-
-            <div class="row" data-equalizer>
-                <div class="small-6 column text-right" data-equalizer-watch>
-                    6-18 Poverty Rate
-                </div>
-                <div class="small-6 column" data-equalizer-watch>
-                    <div class="switch round">
-                        <input id="sixToEighteenPovertyRateSwitch" type="checkbox">
-                        <label for="sixToEighteenPovertyRateSwitch"></label>
-                    </div>
-                </div>
-                <hr>
-            </div>
-
-            <div class="row" data-equalizer>
-                <div class="small-6 column text-right" data-equalizer-watch>
-                    Senior Population
-                </div>
-                <div class="small-6 column" data-equalizer-watch>
-                    <div class="switch round">
-                        <input id="seniorPopulationSwitch" type="checkbox">
-                        <label for="seniorPopulationSwitch"></label>
                     </div>
                 </div>
                 <hr>
@@ -244,18 +191,6 @@
                 <hr>
             </div>
 
-            <div class="row" data-equalizer>
-                <div class="small-6 column text-right" data-equalizer-watch>
-                    Senior Poverty Rate
-                </div>
-                <div class="small-6 column" data-equalizer-watch>
-                    <div class="switch round">
-                        <input id="seniorPovertyRateSwitch" type="checkbox">
-                        <label for="seniorPovertyRateSwitch"></label>
-                    </div>
-                </div>
-                <hr>
-            </div>
         </div>
 
         <div class="full-height small-9 columns">
@@ -269,24 +204,17 @@
 <script id="legend" type="text/x-handlebars-template">
     <div id="googft-legend">
         {{#each subLegends}}
-        <p id="googft-legend-title">{{title}}</p>
+        <p id="googft-legend-title">{{title}}</span>
 
         <div>
-            <span class="googft-legend-swatch" style="background-color: #00ff00"></span>
-            <span class="googft-legend-range">{{int0}}</span>
+            <span class="googft-legend-swatch" style="background-color: {{minColor}}"></span>
+            <span class="googft-legend-range">{{min}}</span>
         </div>
         <div>
-            <span class="googft-legend-swatch" style="background-color: #ffff00"></span>
-            <span class="googft-legend-range">{{int1}}</span>
+            <span class="googft-legend-swatch" style="background-color: {{maxColor}}"></span>
+            <span class="googft-legend-range">{{max}}</span>
         </div>
-        <div>
-            <span class="googft-legend-swatch" style="background-color: #ff9900"></span>
-            <span class="googft-legend-range">{{int2}}</span>
-        </div>
-        <div>
-            <span class="googft-legend-swatch" style="background-color: #ff0000"></span>
-            <span class="googft-legend-range">{{int3}}</span>
-        </div>
+        {{#if hasNext}}<hr />{{/if}}
         {{/each}}
     </div>
 </script>
@@ -294,10 +222,6 @@
 <script src="js/vendor/jquery.js"></script>
 <script src="js/foundation.min.js"></script>
 <script src="js/vendor/handlebars-v1.3.0.js"></script>
-<script>
-    $(document).foundation();
-    $(".full-height").height($(".main").parent().height());
-</script>
 <script src="index.js"></script>
 </body>
 </html>
