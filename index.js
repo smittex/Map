@@ -56,8 +56,8 @@ var layers = [
         overlay: new google.maps.FusionTablesLayer({
             heatmap: { enabled: false },
             query: {
-                select: "col6\x3e\x3e0",
-                from: "",
+                select: "col14",
+                from: "1T5LM9Y5iww9SBb2ZQmCnO1iuziR5FN52NsYk-Zvm",
                 where: ""
             },
             options: {

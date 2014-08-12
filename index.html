@@ -19,6 +19,11 @@
             display: table;
         }
 
+        hr.legendSplitter {
+           margin-bottom: 0px;
+           margin-top: 15px;
+        }
+
         div.switch label {
             text-indent: 88px;
             line-height: 2em;
@@ -50,7 +55,7 @@
 
         #googft-legend p {
             font-weight: bold;
-            margin-top: 0;
+            margin: 0;
         }
 
         #googft-legend div {
@@ -98,7 +103,7 @@
 <body>
 <div class="main">
     <div class="full-height row">
-        <div class="full-height small-3 columns">
+        <div class="full-height small-2 columns">
 
             <div class="row" style="margin-top: 20px;" data-equalizer>
                 <div class="small-6 column text-right" data-equalizer-watch>
@@ -193,7 +198,7 @@
 
         </div>
 
-        <div class="full-height small-9 columns">
+        <div class="full-height small-10 columns">
             <div class="full-height" id="googft-mapCanvas"></div>
         </div>
     </div>
@@ -214,10 +219,35 @@
             <span class="googft-legend-swatch" style="background-color: {{maxColor}}"></span>
             <span class="googft-legend-range">{{max}}</span>
         </div>
-        {{#if hasNext}}<hr />{{/if}}
+        {{#if hasNext}}<hr class="legendSplitter"/>{{/if}}
         {{/each}}
     </div>
 </script>
+
+<div id="foodshelf-legend">
+    <p id="googft-legend-title">Pounds Distributed</p>
+    <div>
+        <img class="googft-dot-icon" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAkAAAAJCAYAAADgkQYQAAAAi0lEQVR42mNgQIAoIF4NxGegdCCSHAMzEC+NijL7v3p1+v8zZ6rAdGCg4X+g+EyYorS0NNv////PxMCxsRYghbEgRQcOHCjGqmjv3kKQor0gRQ8fPmzHquj27WaQottEmxQLshubopAQI5CiEJjj54N8t3FjFth369ZlwHw3jQENgMJpIzSc1iGHEwB8p5qDBbsHtAAAAABJRU5ErkJggg=="/>
+        <span class="googft-legend-range">1,034 to 560,993.8</span>
+    </div>
+    <div>
+        <img class="googft-dot-icon" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAkAAAAJCAYAAADgkQYQAAAAiElEQVR42mNgQIAoIF4NxGegdCCSHAMzEC81izL7n746/X/VmSowbRho+B8oPhOmKM02zfb/TCzQItYCpDAWpOhA8YFirIoK9xaCFO0FKXrY/rAdq6Lm280gRbeJNikWZDc2RUYhRiBFITDHzwf5LmtjFth3GesyYL6bxoAGQOG0ERpO65DDCQDX7ovT++K9KQAAAABJRU5ErkJggg=="/>
+        <span class="googft-legend-range">560,993.8 to 1,120,953.6</span>
+    </div>
+    <div>
+        <img class="googft-dot-icon" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAkAAAAJCAYAAADgkQYQAAAAiklEQVR42mNgQIAoIF4NxGegdCCSHAMzEC81M4v6n56++n9V1RkwbWgY+B8oPhOmKM3WNu3/zJn/MbCFRSxIYSxI0YHi4gNYFRUW7gUp2gtS9LC9/SFWRc3Nt0GKbhNtUizIbmyKjIxCQIpCYI6fD/JdVtZGsO8yMtbBfDeNAQ2AwmkjNJzWIYcTAMk+i9OhipcQAAAAAElFTkSuQmCC"/>
+        <span class="googft-legend-range">1,120,953.6 to 1,680,913.4</span>
+    </div>
+    <div>
+        <img class="googft-dot-icon" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAkAAAAJCAYAAADgkQYQAAAAi0lEQVR42mNgQIAoIF4NxGegdCCSHAMzEC+NMov6vzp99f8zVWfAdKBh4H+g+EyYorQ027T//2f+x8CxFrEghbEgRQcOFB/Aqmhv4V6Qor0gRQ8ftj/Equh2822QottEmxQLshubohCjEJCiEJjj54N8tzFrI9h36zLWwXw3jQENgMJpIzSc1iGHEwBt95qDejjnKAAAAABJRU5ErkJggg=="/>
+        <span class="googft-legend-range">1,680,913.4 to 2,240,873.2</span>
+    </div>
+    <div>
+        <img class="googft-dot-icon" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAkAAAAJCAYAAADgkQYQAAAAiklEQVR42mNgQIAoIF4NxGegdCCSHAMzEC+NUlH5v9rF5f+ZoCAwHaig8B8oPhOmKC1NU/P//7Q0DByrqgpSGAtSdOCAry9WRXt9fECK9oIUPXwYFYVV0e2ICJCi20SbFAuyG5uiECUlkKIQmOPng3y30d0d7Lt1bm4w301jQAOgcNoIDad1yOEEAFm9fSv/VqtJAAAAAElFTkSuQmCC"/>
+        <span class="googft-legend-range">2,240,873.2 to 2,800,833</span>
+    </div>
+    <input id="googft-legend-close" style="display:none" type="button" value="Hide"></input>
+</div>
 
 <script src="js/vendor/jquery.js"></script>
 <script src="js/foundation.min.js"></script>
