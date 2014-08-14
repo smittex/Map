@@ -1,14 +1,15 @@
 $(document).foundation();
 $(".full-height").height($(".main").parent().height());
 
-var map;
+var map,
+    mapDiv;
 
 function initialize() {
     google.maps.visualRefresh = true;
 
-    var mapDiv = $('#googft-mapCanvas')[0];
+    mapDiv = $('#googft-mapCanvas')[0];
     mapDiv.style.width = '100%';
-    //mapDiv.style.height = '90%';
+    mapDiv.style.height = '100%';
 
     map = new google.maps.Map(mapDiv, {
         center: new google.maps.LatLng(44.966655601600145, -93.15117697460937),
@@ -16,7 +17,13 @@ function initialize() {
         mapTypeId: google.maps.MapTypeId.ROADMAP
     });
 
+    $('div.full-height').css('padding-right', 0);
 }
+
+// Resize the content to fit the window
+$(window).on('resize', Foundation.utils.throttle(function(e){
+    $('div.full-height').height($(window).height());
+}, 300));
 
 google.maps.event.addDomListener(window, 'load', initialize);
 
