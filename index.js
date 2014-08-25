@@ -41,7 +41,11 @@ var layers = [
                 styleId: 3,
                 templateId: 4
             }
-        })
+        }),
+        legend: {
+            title: 'Pounds Distributed',
+            custom: true
+        }
     },
     {
         name: 'csfpSwitch',
@@ -168,7 +172,7 @@ $(document).ready(function () {
         for (var i = layers.length - 1; i >= 0; i--) {
             layers[i].overlay.setMap($('#' + layers[i].name)[0].checked ? map : null);
 
-            if($('#' + layers[i].name)[0].checked) {
+            if($('#' + layers[i].name)[0].checked && typeof layers[i].legend != "undefined") {
                 legendData.push(layers[i].legend);
             }
         }
@@ -184,6 +188,7 @@ $(document).ready(function () {
 
         var legend = template(context);
         $('#googft-legend').replaceWith(legend);
+
         context.subLegends.length ? map.controls[google.maps.ControlPosition.RIGHT_BOTTOM].push(document.getElementById('googft-legend')) : null;
     });
 });

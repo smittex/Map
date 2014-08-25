@@ -13,6 +13,8 @@
             margin: 0;
             padding: 0;
             width: 100%;
+            background-color: #F2F1E6;
+
         }
 
         .full-height {
@@ -20,14 +22,13 @@
         }
 
         hr.legendSplitter {
-           margin-bottom: 0px;
-           margin-top: 15px;
+            margin-bottom: 0px;
+            margin-top: 15px;
         }
 
-        div.switch label {
-            text-indent: 88px;
-            line-height: 2em;
-            color: #008cba;
+        div.switch input:checked + label {
+            background: #005E60 !important;
+
         }
 
         #googft-mapCanvas {
@@ -46,7 +47,7 @@
 
         #googft-legend {
             background-color: #fff;
-            border: 1px solid #000;
+            border: 2px solid #005E60;
             font-family: Arial, sans-serif;
             font-size: 12px;
             margin: 5px;
@@ -96,6 +97,28 @@
             color: #666;
             font-size: 11px;
         }
+
+        .marker {
+            width: 35px;
+            height: 35px;
+            text-align: center;
+            display: inline-block;
+            margin-bottom: 0 !important;
+        }
+
+        .foodshelf {
+            list-style-type:  none;
+            margin: 0;
+        }
+
+        .googft-dot-icon {
+            width: 35px;
+            height: 35px;
+        }
+
+        .no-padding {
+            padding: 0;
+        }
     </style>
 
     <script type="text/javascript" src="https://maps.google.com/maps/api/js?sensor=false&amp;v=3"></script>
@@ -104,11 +127,18 @@
 <div class="main">
     <div class="full-height row">
         <div class="full-height small-2 columns">
+            <div class="row" style="text-align: center;" data-equalizer>
+                <img src="img/small_logo.png"/>
+            </div>
+
 
             <div class="row" style="margin-top: 20px;" data-equalizer>
-                <div class="small-6 column text-right" data-equalizer-watch>
-                    Food Shelves
-                </div>
+                <label for="foodShelfSwitch">
+                    <div class="small-6 column text-right no-padding" data-equalizer-watch>
+                        Food Shelves
+                    </div>
+                </label>
+
                 <div class="small-6 column" data-equalizer-watch>
                     <div class="switch round">
                         <input id="foodShelfSwitch" type="checkbox">
@@ -119,9 +149,12 @@
             </div>
 
             <div class="row" data-equalizer>
-                <div class="small-6 column text-right" data-equalizer-watch>
-                    CSFP Locations
-                </div>
+                <label for="csfpSwitch">
+                    <div class="small-6 column text-right no-padding" data-equalizer-watch>
+                        CSFP Locations
+                    </div>
+                </label>
+
                 <div class="small-6 column" data-equalizer-watch>
                     <div class="switch round">
                         <input id="csfpSwitch" type="checkbox">
@@ -132,9 +165,12 @@
             </div>
 
             <div class="row" data-equalizer>
-                <div class="small-6 column text-right" data-equalizer-watch>
-                    Schools
-                </div>
+                <label for="schoolSwitch">
+                    <div class="small-6 column text-right no-padding" data-equalizer-watch>
+                        Schools
+                    </div>
+                </label>
+
                 <div class="small-6 column" data-equalizer-watch>
                     <div class="switch round">
                         <input id="schoolSwitch" type="checkbox">
@@ -145,9 +181,12 @@
             </div>
 
             <div class="row" data-equalizer>
-                <div class="small-6 column text-right" data-equalizer-watch>
-                    Congressional Districts
-                </div>
+                <label for="conDistSwitch">
+                    <div class="small-6 column text-right no-padding" data-equalizer-watch>
+                        Congressional Districts
+                    </div>
+                </label>
+
                 <div class="small-6 column" data-equalizer-watch>
                     <div class="switch round">
                         <input id="conDistSwitch" type="checkbox">
@@ -158,9 +197,12 @@
             </div>
 
             <div class="row" data-equalizer>
-                <div class="small-6 column text-right" data-equalizer-watch>
-                    Children 0-5 in Poverty
-                </div>
+                <label for="childrenInPovertySwitch">
+                    <div class="small-6 column text-right no-padding" data-equalizer-watch>
+                        Children 0-5 in Poverty
+                    </div>
+                </label>
+
                 <div class="small-6 column" data-equalizer-watch>
                     <div class="switch round">
                         <input id="childrenInPovertySwitch" type="checkbox">
@@ -171,9 +213,12 @@
             </div>
 
             <div class="row" data-equalizer>
-                <div class="small-6 column text-right" data-equalizer-watch>
-                    Children 6-18 in Poverty
-                </div>
+                <label for="sixToEighteenInPovertySwitch">
+                    <div class="small-6 column text-right no-padding" data-equalizer-watch>
+                        Children 6-18 in Poverty
+                    </div>
+                </label>
+
                 <div class="small-6 column" data-equalizer-watch>
                     <div class="switch round">
                         <input id="sixToEighteenInPovertySwitch" type="checkbox">
@@ -184,9 +229,12 @@
             </div>
 
             <div class="row" data-equalizer>
-                <div class="small-6 column text-right" data-equalizer-watch>
-                    Seniors in Poverty
-                </div>
+                <label for="seniorsInPovertySwitch">
+                    <div class="small-6 column text-right no-padding" data-equalizer-watch>
+                        Seniors in Poverty
+                    </div>
+                </label>
+
                 <div class="small-6 column" data-equalizer-watch>
                     <div class="switch round">
                         <input id="seniorsInPovertySwitch" type="checkbox">
@@ -198,10 +246,11 @@
 
         </div>
 
-        <div class="full-height small-10 columns">
+        <div class="full-height small-10 columns no-padding">
             <div class="full-height" id="googft-mapCanvas"></div>
         </div>
     </div>
+</div>
 </div>
 
 <div id="googft-legend" style="display: none;"></div>
@@ -209,47 +258,57 @@
 <script id="legend" type="text/x-handlebars-template">
     <div id="googft-legend">
         {{#each subLegends}}
-        <p id="googft-legend-title">{{title}}</span>
+            <p id="googft-legend-title">{{title}}</p>
+            {{#if custom}}
+                <ul class="foodshelf">
+                    <li>
+                        <div class="marker">
+                            <img class="googft-dot-icon"
+                                 src="img/little_white.png"/></div>
+                        <span class="googft-legend-range">0 to 200,000</span>
+                    </li>
+                    <li>
+                        <div class="marker">
+                            <img class="googft-dot-icon"
+                                 src="img/little_turquoise.png"/></div>
+                        <span class="googft-legend-range">200,000 to 425,000</span>
+                    </li>
+                    <li>
+                        <div class="marker">
+                            <img class="googft-dot-icon"
+                                 src="img/white.png"/></div>
+                        <span class="googft-legend-range">425,000 to 635,000</span>
+                    </li>
+                    <li>
+                        <div class="marker">
+                            <img class="googft-dot-icon"
+                                 src="img/turquoise.png"/></div>
+                        <span class="googft-legend-range">635,000 to 1,000,000</span>
+                    </li>
+                    <li>
+                        <div class="marker">
+                            <img class="googft-dot-icon"
+                                 src="img/blue.png"/></div>
+                        <span class="googft-legend-range">1,000,000 to 3,000,000</span>
+                    </li>
+                </ul>
+            {{else}}
+                <div>
+                    <span class="googft-legend-swatch" style="background-color: {{minColor}}"></span>
+                    <span class="googft-legend-range">{{min}}</span>
+                </div>
+                <div>
+                    <span class="googft-legend-swatch" style="background-color: {{maxColor}}"></span>
+                    <span class="googft-legend-range">{{max}}</span>
+                </div>
+            {{/if}}
 
-        <div>
-            <span class="googft-legend-swatch" style="background-color: {{minColor}}"></span>
-            <span class="googft-legend-range">{{min}}</span>
-        </div>
-        <div>
-            <span class="googft-legend-swatch" style="background-color: {{maxColor}}"></span>
-            <span class="googft-legend-range">{{max}}</span>
-        </div>
-        {{#if hasNext}}<hr class="legendSplitter"/>{{/if}}
+            {{#if hasNext}}
+                <hr class="legendSplitter"/>
+            {{/if}}
         {{/each}}
     </div>
 </script>
-
-<script id="legend" type="text/x-handlebars-template">
-    <div id="foodshelf-legend">
-    <p id="googft-legend-title">Pounds Distributed</p>
-    <div>
-        <img class="googft-dot-icon" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAkAAAAJCAYAAADgkQYQAAAAi0lEQVR42mNgQIAoIF4NxGegdCCSHAMzEC+NijL7v3p1+v8zZ6rAdGCg4X+g+EyYorS0NNv////PxMCxsRYghbEgRQcOHCjGqmjv3kKQor0gRQ8fPmzHquj27WaQottEmxQLshubopAQI5CiEJjj54N8t3FjFth369ZlwHw3jQENgMJpIzSc1iGHEwB8p5qDBbsHtAAAAABJRU5ErkJggg=="/>
-        <span class="googft-legend-range">1,034 to 560,993.8</span>
-    </div>
-    <div>
-        <img class="googft-dot-icon" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAkAAAAJCAYAAADgkQYQAAAAiElEQVR42mNgQIAoIF4NxGegdCCSHAMzEC81izL7n746/X/VmSowbRho+B8oPhOmKM02zfb/TCzQItYCpDAWpOhA8YFirIoK9xaCFO0FKXrY/rAdq6Lm280gRbeJNikWZDc2RUYhRiBFITDHzwf5LmtjFth3GesyYL6bxoAGQOG0ERpO65DDCQDX7ovT++K9KQAAAABJRU5ErkJggg=="/>
-        <span class="googft-legend-range">560,993.8 to 1,120,953.6</span>
-    </div>
-    <div>
-        <img class="googft-dot-icon" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAkAAAAJCAYAAADgkQYQAAAAiklEQVR42mNgQIAoIF4NxGegdCCSHAMzEC81M4v6n56++n9V1RkwbWgY+B8oPhOmKM3WNu3/zJn/MbCFRSxIYSxI0YHi4gNYFRUW7gUp2gtS9LC9/SFWRc3Nt0GKbhNtUizIbmyKjIxCQIpCYI6fD/JdVtZGsO8yMtbBfDeNAQ2AwmkjNJzWIYcTAMk+i9OhipcQAAAAAElFTkSuQmCC"/>
-        <span class="googft-legend-range">1,120,953.6 to 1,680,913.4</span>
-    </div>
-    <div>
-        <img class="googft-dot-icon" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAkAAAAJCAYAAADgkQYQAAAAi0lEQVR42mNgQIAoIF4NxGegdCCSHAMzEC+NMov6vzp99f8zVWfAdKBh4H+g+EyYorQ027T//2f+x8CxFrEghbEgRQcOFB/Aqmhv4V6Qor0gRQ8ftj/Equh2822QottEmxQLshubohCjEJCiEJjj54N8tzFrI9h36zLWwXw3jQENgMJpIzSc1iGHEwBt95qDejjnKAAAAABJRU5ErkJggg=="/>
-        <span class="googft-legend-range">1,680,913.4 to 2,240,873.2</span>
-    </div>
-    <div>
-        <img class="googft-dot-icon" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAkAAAAJCAYAAADgkQYQAAAAiklEQVR42mNgQIAoIF4NxGegdCCSHAMzEC+NUlH5v9rF5f+ZoCAwHaig8B8oPhOmKC1NU/P//7Q0DByrqgpSGAtSdOCAry9WRXt9fECK9oIUPXwYFYVV0e2ICJCi20SbFAuyG5uiECUlkKIQmOPng3y30d0d7Lt1bm4w301jQAOgcNoIDad1yOEEAFm9fSv/VqtJAAAAAElFTkSuQmCC"/>
-        <span class="googft-legend-range">2,240,873.2 to 2,800,833</span>
-    </div>
-</div></script>
-
-
 
 <script src="js/vendor/jquery.js"></script>
 <script src="js/foundation.min.js"></script>
