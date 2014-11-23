@@ -82,6 +82,21 @@ var layers = [
         })
     },
     {
+        name: 'precinctSwitch',
+        overlay: new google.maps.FusionTablesLayer({
+            heatmap: { enabled: false },
+            query: {
+                select: "colt",
+                from: "1UHN42Ej1v23RI7LoClSYu5YNwAQ79X6TMK8uHpYF",
+                where: ""
+            },
+            options: {
+                styleId: 2,
+                templateId: 2
+            }
+        })
+    },
+    {
         name: 'childrenInPovertySwitch',
         overlay: new google.maps.FusionTablesLayer({
             heatmap: { enabled: false },
