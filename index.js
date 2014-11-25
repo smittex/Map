@@ -97,8 +97,8 @@ var layers = [
         overlay: new google.maps.FusionTablesLayer({
             heatmap: { enabled: false },
             query: {
-                select: "colt",
-                from: "1UHN42Ej1v23RI7LoClSYu5YNwAQ79X6TMK8uHpYF",
+                select: "col11\x3e\x3e0",
+                from: "1G-YHZ4OuUL82blnRX-AcDREogGs9f6JKbpCY_40b",
                 where: ""
             },
             options: {
