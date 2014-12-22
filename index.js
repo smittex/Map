@@ -183,6 +183,18 @@ $(document).ready(function () {
         var legendData = [],
             context = {subLegends: []};
 
+        // Only allow one district overlay
+        if (this.id === 'conDistSwitch'
+            && $('#conDistSwitch').prop('checked')
+            && $('#precinctSwitch').prop('checked')) {
+                $('#precinctSwitch').prop('checked', false);
+        }
+        if (this.id === "precinctSwitch"
+            && $('#precinctSwitch').prop('checked')
+            && $('#conDistSwitch').prop('checked')) {
+                $('#conDistSwitch').prop('checked', false);
+        }
+
         // Iterating from top down to keep the food shelf, CSFP, and congressional layers on top
         for (var i = layers.length - 1; i >= 0; i--) {
             layers[i].overlay.setMap($('#' + layers[i].name)[0].checked ? map : null);
